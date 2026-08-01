@@ -860,24 +860,10 @@
     </div>
   </div>
 
-  <!-- Loader: ensure GSAP + ScrollTrigger load before script.js to avoid race issues -->
-  <script>
-    window.addEventListener("load", () => {
-      const gsapScript = document.createElement("script");
-      gsapScript.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js";
-      gsapScript.onload = () => {
-        const stScript = document.createElement("script");
-        stScript.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js";
-        stScript.onload = () => {
-          const mainScript = document.createElement("script");
-          mainScript.src = "script.js";
-          document.body.appendChild(mainScript);
-        };
-        document.body.appendChild(stScript);
-      };
-      document.body.appendChild(gsapScript);
-    });
-  </script>
+  <!-- GSAP & Main Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 </body>

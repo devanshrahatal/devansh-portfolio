@@ -47,6 +47,7 @@ if (logContainer && preloader) {
           if (typeof tl !== 'undefined') tl.play();
           
           ScrollTrigger.refresh();
+          updateScrollProgress();
           
         }, 800); // Pause after last log before fade
       }
@@ -76,6 +77,7 @@ function updateScrollProgress() {
 
 window.addEventListener("scroll", updateScrollProgress, { passive: true });
 window.addEventListener("resize", updateScrollProgress);
+window.addEventListener("load", updateScrollProgress);
 document.addEventListener("DOMContentLoaded", updateScrollProgress);
 updateScrollProgress();
 
@@ -1119,19 +1121,17 @@ function drawRadar(progressVal) {
   }
 }
 
-// Initial draw (Full scale)
-drawRadar(1);
+// Initial draw (Contracted at 0 so it is not pre-filled before scrolling)
+radarProgress.val = 0;
+drawRadar(0);
 
-// Animate radar chart on scroll — expand from center on first view
+// Animate radar chart on scroll — expand from center when scrolled into view
 if (document.getElementById("radar-chart")) {
-  // Reset to small, then animate to full on scroll enter
   ScrollTrigger.create({
     trigger: "#radar-chart",
-    start: "top 95%",
+    start: "top 85%",
     once: true,
     onEnter: () => {
-      radarProgress.val = 0.15;
-      drawRadar(0.15);
       gsap.to(radarProgress, {
         val: 1,
         duration: 1.4,
