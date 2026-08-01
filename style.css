@@ -138,8 +138,7 @@ html {
 .project-card,
 .skill-card,
 .contact-wrapper > * {
-  opacity: 0;
-  transform: translateY(40px);
+  opacity: 1;
 }
 
 .projects-section,
@@ -1868,8 +1867,7 @@ section {
   border: 1px solid rgba(148,163,184,0.3);
   border-radius: 1rem;
   backdrop-filter: blur(8px);
-  opacity: 0; /* For animation */
-  transform: translateY(40px);
+  opacity: 1;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 .exp-card:hover {
@@ -1899,8 +1897,7 @@ section {
   font-size: 1.6rem;
   font-weight: 600;
   margin: 3rem 0 1rem;
-  opacity: 0;
-  transform: translateY(20px);
+  opacity: 1;
   color: #ffffffcc;
 }
 .timeline-glow {
@@ -4250,5 +4247,23 @@ li{
   }
   .ai-chat-badge {
     display: none;
+  }
+}
+
+/* Mobile Animation Safety Override: Guarantee 100% visibility on touch/mobile devices */
+@media (max-width: 900px) {
+  .about-left,
+  .about-right,
+  .highlight-card,
+  .project-card,
+  .skill-card,
+  .contact-wrapper > *,
+  .exp-card,
+  .year-header,
+  .service-card,
+  .certificate-card {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
   }
 }

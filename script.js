@@ -46,6 +46,13 @@ if (logContainer && preloader) {
           // Trigger Hero Animations manually
           if (typeof tl !== 'undefined') tl.play();
           
+          if (window.innerWidth <= 900) {
+            document.querySelectorAll(".about-left, .about-right, .highlight-card, .project-card, .skill-card, .contact-wrapper > *, .exp-card, .year-header, .service-card").forEach(el => {
+              el.style.opacity = "1";
+              el.style.transform = "none";
+            });
+          }
+          
           ScrollTrigger.refresh();
           
         }, 800); // Pause after last log before fade
@@ -232,20 +239,20 @@ gsap.from(".navbar", {
 
 ScrollTrigger.batch(".about-left, .about-right", {
   start: "top 95%",
-  onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, stagger: 0.2 }),
-  onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 40 })
+  once: true,
+  onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, stagger: 0.2 })
 });
 ScrollTrigger.batch(".highlight-card", {
   start: "top 95%",
-  onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.5, stagger: 0.15 }),
-  onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 20 })
+  once: true,
+  onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.5, stagger: 0.15 })
 });
 
 // ===================== PROJECTS SCROLL ANIMATION =====================
 ScrollTrigger.batch(".project-card", {
   start: "top 95%",
-  onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, stagger: 0.2 }),
-  onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 50 })
+  once: true,
+  onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, stagger: 0.2 })
 });
 
 // ===================== SKILLS ACCORDION =====================
@@ -291,8 +298,8 @@ document.querySelectorAll(".skill-category").forEach(cat => {
 
 ScrollTrigger.batch(".contact-wrapper > *", {
   start: "top 95%",
-  onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, stagger: 0.2 }),
-  onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 40 })
+  once: true,
+  onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, stagger: 0.2 })
 });
 
 // ================= BACK TO TOP BUTTON =================
@@ -439,20 +446,18 @@ if (window.ScrollTrigger) {
 
 ScrollTrigger.batch(".exp-card", {
   start: "top 95%",
+  once: true,
   onEnter: batch => gsap.to(batch, {
     opacity: 1,
     y: 0,
     duration: 0.7,
     stagger: 0.2,
     ease: "power3.out"
-  }),
-  onLeaveBack: batch => gsap.to(batch, {
-    opacity: 0,
-    y: 40
   })
 });
 ScrollTrigger.batch(".exp-dot", {
   start: "top 90%",
+  once: true,
   onEnter: batch => gsap.to(batch, {
     scale: 1,
     opacity: 1,
@@ -460,12 +465,6 @@ ScrollTrigger.batch(".exp-dot", {
     stagger: 0.15,
     ease: "back.out(1.8)",
     boxShadow: "0 0 15px rgba(226, 28, 52, 0.9)"
-  }),
-  onLeaveBack: batch => gsap.to(batch, {
-    scale: 0.4,
-    opacity: 0,
-    duration: 0.3,
-    boxShadow: "0 0 0 rgba(226, 28, 52,0)"
   })
 });
 document.querySelectorAll(".exp-card").forEach(card => {
@@ -488,42 +487,39 @@ document.querySelectorAll(".exp-card").forEach(card => {
 });
 ScrollTrigger.batch(".exp-item", {
   start: "top 80%",
+  once: true,
   onEnter: batch => batch.forEach(item => {
     const dot = item.querySelector(".exp-dot");
-    dot.classList.add("active");
-    gsap.to(dot, { opacity: 1, scale: 1, duration: 0.4 });
-  }),
-  onLeaveBack: batch => batch.forEach(item => {
-    const dot = item.querySelector(".exp-dot");
-    dot.classList.remove("active");
-    gsap.to(dot, { opacity: 0, scale: 0.4, duration: 0.3 });
+    if (dot) {
+      dot.classList.add("active");
+      gsap.to(dot, { opacity: 1, scale: 1, duration: 0.4 });
+    }
   })
 });
 const glow = document.querySelector(".timeline-glow");
 
-ScrollTrigger.create({
-  trigger: ".experience-timeline",
-  start: "top top",
-  end: "bottom bottom",
-  scrub: true,
-  onUpdate: self => {
-    glow.style.opacity = 1;
-    glow.style.top = `${self.progress * 100}%`;
-  },
-});
+if (glow) {
+  ScrollTrigger.create({
+    trigger: ".experience-timeline",
+    start: "top top",
+    end: "bottom bottom",
+    scrub: true,
+    onUpdate: self => {
+      glow.style.opacity = 1;
+      glow.style.top = `${self.progress * 100}%`;
+    },
+  });
+}
+
 ScrollTrigger.batch(".year-header", {
   start: "top 90%",
+  once: true,
   onEnter: batch => gsap.to(batch, {
     opacity: 1,
     y: 0,
     duration: 0.6,
     stagger: 0.15,
     ease: "power3.out"
-  }),
-  onLeaveBack: batch => gsap.to(batch, {
-    opacity: 0,
-    y: 20,
-    duration: 0.3
   })
 });
 // ===================== TYPEWRITER ANIMATION =====================
@@ -902,16 +898,13 @@ progressBars.forEach((bar) => {
 
 ScrollTrigger.batch(".service-card", {
   start: "top 90%",
+  once: true,
   onEnter: batch => gsap.to(batch, {
     opacity: 1,
     y: 0,
     duration: 0.6,
     stagger: 0.2,
     ease: "power2.out"
-  }),
-  onLeaveBack: batch => gsap.to(batch, {
-    opacity: 0,
-    y: 30
   })
 });
 
@@ -1181,6 +1174,7 @@ document.querySelectorAll(".stat-value[data-target]").forEach(statEl => {
     trigger: statEl,
     start: "top 85%",
     toggleActions: "play none none reverse",
+    once: true,
     onEnter: () => {
       const counter = { val: 0 };
       gsap.to(counter, {
@@ -1191,9 +1185,6 @@ document.querySelectorAll(".stat-value[data-target]").forEach(statEl => {
           statEl.textContent = Math.round(counter.val) + suffix;
         }
       });
-    },
-    onLeaveBack: () => {
-      statEl.textContent = "0" + suffix;
     }
   });
 });
