@@ -218,7 +218,7 @@
           <!-- Data polygon (animated via JS) -->
           <defs>
             <clipPath id="radar-data-clip">
-              <polygon id="radar-clip-polygon" points="150,150 150,150 150,150 150,150 150,150 150,150"></polygon>
+              <polygon id="radar-clip-polygon" points="150,33 265,93 260,205 150,260 44,203 38,93"></polygon>
             </clipPath>
           </defs>
           <!-- Inner Wave Glow (Clipped to skills polygon) -->
@@ -226,7 +226,7 @@
             <circle class="radar-inner-glow" cx="150" cy="150" r="140"></circle>
             <circle class="radar-inner-glow" cx="150" cy="150" r="140"></circle>
           </g>
-          <polygon id="radar-data" class="radar-data" points="150,150 150,150 150,150 150,150 150,150 150,150"></polygon>
+          <polygon id="radar-data" class="radar-data" points="150,33 265,93 260,205 150,260 44,203 38,93"></polygon>
           <!-- Data dots -->
           <g id="radar-dots" class="radar-dots"></g>
         </svg>
@@ -244,9 +244,9 @@
         </div>
       </div>
       <div class="dashboard-stats">
-        <div class="stat-item"><span class="stat-value" data-target="10" data-suffix="+">0</span><span class="stat-label">Projects</span></div>
-        <div class="stat-item"><span class="stat-value" data-target="9" data-suffix=".15">0</span><span class="stat-label">B.Tech CPI</span></div>
-        <div class="stat-item"><span class="stat-value" data-target="100" data-suffix="K+">0</span><span class="stat-label">Records Analyzed</span></div>
+        <div class="stat-item"><span class="stat-value" data-target="10" data-suffix="+">10+</span><span class="stat-label">Projects</span></div>
+        <div class="stat-item"><span class="stat-value" data-target="9" data-suffix=".15">9.15</span><span class="stat-label">B.Tech CPI</span></div>
+        <div class="stat-item"><span class="stat-value" data-target="100" data-suffix="K+">100K+</span><span class="stat-label">Records Analyzed</span></div>
       </div>
     </div>
   </section>
@@ -577,96 +577,103 @@
     <h2 class="section-title center" data-glitch="My Certifications">My <span class="accent">Certifications</span></h2>
     <p class="certificates-subtitle">Industry qualifications and training programs.</p>
 
-    <div class="certificates-marquee">
-      <div class="certificates-track">
-        <!-- Set 1 -->
-        <a href="./assets/certificate-images/lnuxworld-certificate.jpg" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
-          <div class="cert-image">
-            <img src="./assets/certificate-images/lnuxworld-certificate.jpg" alt="Data Analytics & BI Training Certificate" />
-          </div>
-          <div class="cert-info">
-            <h3>Data Analytics & BI Training</h3>
-            <p>LinuxWorld Informatics Pvt. Ltd.</p>
-            <span class="cert-date">2026 (Click to View)</span>
-          </div>
-        </a>
+    <div class="cert-controls-wrapper">
+      <button type="button" id="cert-prev" class="cert-nav-btn" aria-label="Scroll left">&#8249;</button>
+      <div class="certificates-marquee" id="certificates-marquee">
+        <div class="certificates-track" id="certificates-track">
+          <!-- Set 1 -->
+          <a href="./assets/certificate-images/lnuxworld-certificate.jpg" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
+            <div class="cert-image">
+              <img src="./assets/certificate-images/lnuxworld-certificate.jpg" alt="Data Analytics & BI Training Certificate" />
+            </div>
+            <div class="cert-info">
+              <h3>Data Analytics & BI Training</h3>
+              <p>LinuxWorld Informatics Pvt. Ltd.</p>
+              <span class="cert-date">2026 (Click to View)</span>
+            </div>
+          </a>
 
-        <a href="./assets/certificate-images/linuxworld-project-certificate.jpg" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
-          <div class="cert-image">
-            <img src="./assets/certificate-images/linuxworld-project-certificate.jpg" alt="Analytics Project Certification" />
-          </div>
-          <div class="cert-info">
-            <h3>Analytics Project Certification</h3>
-            <p>LinuxWorld Informatics Pvt. Ltd.</p>
-            <span class="cert-date">2026 (Click to View)</span>
-          </div>
-        </a>
+          <a href="./assets/certificate-images/linuxworld-project-certificate.jpg" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
+            <div class="cert-image">
+              <img src="./assets/certificate-images/linuxworld-project-certificate.jpg" alt="Analytics Project Certification" />
+            </div>
+            <div class="cert-info">
+              <h3>Analytics Project Certification</h3>
+              <p>LinuxWorld Informatics Pvt. Ltd.</p>
+              <span class="cert-date">2026 (Click to View)</span>
+            </div>
+          </a>
 
-        <a href="./assets/certificate-images/edunet-foundaton-course.png" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
-          <div class="cert-image">
-            <img src="./assets/certificate-images/edunet-foundaton-course.png" alt="Edunet Foundation Course Certificate" />
-          </div>
-          <div class="cert-info">
-            <h3>Python, Data Analysis & AI</h3>
-            <p>Edunet Foundation | SAP Code Unnati</p>
-            <span class="cert-date">2025 (Click to View)</span>
-          </div>
-        </a>
+          <a href="./assets/certificate-images/edunet-foundaton-course.png" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
+            <div class="cert-image">
+              <img src="./assets/certificate-images/edunet-foundaton-course.png" alt="Edunet Foundation Course Certificate" />
+            </div>
+            <div class="cert-info">
+              <h3>Python, Data Analysis & AI</h3>
+              <p>Edunet Foundation | SAP Code Unnati</p>
+              <span class="cert-date">2025 (Click to View)</span>
+            </div>
+          </a>
 
-        <a href="./assets/certificate-images/edunet-advance-course.png" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
-          <div class="cert-image">
-            <img src="./assets/certificate-images/edunet-advance-course.png" alt="Edunet Advanced Course Certificate" />
-          </div>
-          <div class="cert-info">
-            <h3>Machine Learning & SAP Analytics</h3>
-            <p>Edunet Foundation | SAP Code Unnati</p>
-            <span class="cert-date">2026 (Click to View)</span>
-          </div>
-        </a>
+          <a href="./assets/certificate-images/edunet-advance-course.png" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
+            <div class="cert-image">
+              <img src="./assets/certificate-images/edunet-advance-course.png" alt="Edunet Advanced Course Certificate" />
+            </div>
+            <div class="cert-info">
+              <h3>Machine Learning & SAP Analytics</h3>
+              <p>Edunet Foundation | SAP Code Unnati</p>
+              <span class="cert-date">2026 (Click to View)</span>
+            </div>
+          </a>
 
-        <!-- Set 2 (Duplicate for Loop) -->
-        <a href="./assets/certificate-images/lnuxworld-certificate.jpg" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
-          <div class="cert-image">
-            <img src="./assets/certificate-images/lnuxworld-certificate.jpg" alt="Data Analytics & BI Training Certificate" />
-          </div>
-          <div class="cert-info">
-            <h3>Data Analytics & BI Training</h3>
-            <p>LinuxWorld Informatics Pvt. Ltd.</p>
-            <span class="cert-date">2026 (Click to View)</span>
-          </div>
-        </a>
+          <!-- Set 2 (Duplicate for Loop) -->
+          <a href="./assets/certificate-images/lnuxworld-certificate.jpg" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
+            <div class="cert-image">
+              <img src="./assets/certificate-images/lnuxworld-certificate.jpg" alt="Data Analytics & BI Training Certificate" />
+            </div>
+            <div class="cert-info">
+              <h3>Data Analytics & BI Training</h3>
+              <p>LinuxWorld Informatics Pvt. Ltd.</p>
+              <span class="cert-date">2026 (Click to View)</span>
+            </div>
+          </a>
 
-        <a href="./assets/certificate-images/linuxworld-project-certificate.jpg" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
-          <div class="cert-image">
-            <img src="./assets/certificate-images/linuxworld-project-certificate.jpg" alt="Analytics Project Certification" />
-          </div>
-          <div class="cert-info">
-            <h3>Analytics Project Certification</h3>
-            <p>LinuxWorld Informatics Pvt. Ltd.</p>
-            <span class="cert-date">2026 (Click to View)</span>
-          </div>
-        </a>
+          <a href="./assets/certificate-images/linuxworld-project-certificate.jpg" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
+            <div class="cert-image">
+              <img src="./assets/certificate-images/linuxworld-project-certificate.jpg" alt="Analytics Project Certification" />
+            </div>
+            <div class="cert-info">
+              <h3>Analytics Project Certification</h3>
+              <p>LinuxWorld Informatics Pvt. Ltd.</p>
+              <span class="cert-date">2026 (Click to View)</span>
+            </div>
+          </a>
 
-        <a href="./assets/certificate-images/edunet-foundaton-course.png" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
-          <div class="cert-image">
-            <img src="./assets/certificate-images/edunet-foundaton-course.png" alt="Edunet Foundation Course Certificate" />
-          </div>
-          <div class="cert-info">
-            <h3>Python, Data Analysis & AI</h3>
-            <p>Edunet Foundation | SAP Code Unnati</p>
-            <span class="cert-date">2025 (Click to View)</span>
-          </div>
-        </a>
+          <a href="./assets/certificate-images/edunet-foundaton-course.png" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
+            <div class="cert-image">
+              <img src="./assets/certificate-images/edunet-foundaton-course.png" alt="Edunet Foundation Course Certificate" />
+            </div>
+            <div class="cert-info">
+              <h3>Python, Data Analysis & AI</h3>
+              <p>Edunet Foundation | SAP Code Unnati</p>
+              <span class="cert-date">2025 (Click to View)</span>
+            </div>
+          </a>
 
-        <a href="./assets/certificate-images/edunet-advance-course.png" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
-          <div class="cert-image">
-            <img src="./assets/certificate-images/edunet-advance-course.png" alt="Edunet Advanced Course Certificate" />
-          </div>
-          <div class="cert-info">
-            <h3>Machine Learning & SAP Analytics</h3>
-            <p>Edunet Foundation | SAP Code Unnati</p>
-            <span class="cert-date">2026 (Click to View)</span>
-          </div>
+          <a href="./assets/certificate-images/edunet-advance-course.png" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
+            <div class="cert-image">
+              <img src="./assets/certificate-images/edunet-advance-course.png" alt="Edunet Advanced Course Certificate" />
+            </div>
+            <div class="cert-info">
+              <h3>Machine Learning & SAP Analytics</h3>
+              <p>Edunet Foundation | SAP Code Unnati</p>
+              <span class="cert-date">2026 (Click to View)</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <button type="button" id="cert-next" class="cert-nav-btn" aria-label="Scroll right">&#8250;</button>
+    </div> </div>
         </a>
       </div>
     </div>

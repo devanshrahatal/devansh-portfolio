@@ -1183,8 +1183,8 @@ document.querySelectorAll(".stat-value[data-target]").forEach(statEl => {
   const target = parseInt(statEl.getAttribute("data-target"), 10);
   const suffix = statEl.getAttribute("data-suffix") || "";
   
-  // Set initial text
-  statEl.textContent = "0" + suffix;
+  // Set initial text to full value by default
+  statEl.textContent = target + suffix;
   
   ScrollTrigger.create({
     trigger: statEl,
@@ -1192,17 +1192,37 @@ document.querySelectorAll(".stat-value[data-target]").forEach(statEl => {
     once: true,
     onEnter: () => {
       const counter = { val: 0 };
-      gsap.to(counter, {
-        val: target,
-        duration: 2,
-        ease: "power2.out",
-        onUpdate: () => {
-          statEl.textContent = Math.round(counter.val) + suffix;
+      gsap.fromTo(counter, 
+        { val: 0 },
+        {
+          val: target,
+          duration: 1.8,
+          ease: "power2.out",
+          onUpdate: () => {
+            statEl.textContent = Math.round(counter.val) + suffix;
+          }
         }
-      });
+      );
     }
   });
 });
+
+// ================= CERTIFICATE MARQUEE MANUAL SWIPE & BUTTON CONTROLS =================
+const certMarquee = document.getElementById("certificates-marquee");
+const certPrevBtn = document.getElementById("cert-prev");
+const certNextBtn = document.getElementById("cert-next");
+
+if (certPrevBtn && certMarquee) {
+  certPrevBtn.addEventListener("click", () => {
+    certMarquee.scrollBy({ left: -360, behavior: "smooth" });
+  });
+}
+
+if (certNextBtn && certMarquee) {
+  certNextBtn.addEventListener("click", () => {
+    certMarquee.scrollBy({ left: 360, behavior: "smooth" });
+  });
+}
 
 // ===================== RADAR HOVER / TOUCH DETAIL POPUPS =====================
 
