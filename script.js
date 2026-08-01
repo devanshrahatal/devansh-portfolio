@@ -46,13 +46,6 @@ if (logContainer && preloader) {
           // Trigger Hero Animations manually
           if (typeof tl !== 'undefined') tl.play();
           
-          if (window.innerWidth <= 900) {
-            document.querySelectorAll(".about-left, .about-right, .highlight-card, .project-card, .skill-card, .contact-wrapper > *, .exp-card, .year-header, .service-card").forEach(el => {
-              el.style.opacity = "1";
-              el.style.transform = "none";
-            });
-          }
-          
           ScrollTrigger.refresh();
           
         }, 800); // Pause after last log before fade
