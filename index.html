@@ -203,22 +203,22 @@
     <div class="dashboard-card">
       <div class="radar-chart-container">
         <svg id="radar-chart" viewBox="0 0 300 300" class="radar-svg">
-          <!-- Grid rings -->
-          <polygon class="radar-grid" points="150,30 270,90 270,210 150,270 30,210 30,90"></polygon>
-          <polygon class="radar-grid" points="150,60 240,105 240,195 150,240 60,195 60,105"></polygon>
-          <polygon class="radar-grid" points="150,90 210,120 210,180 150,210 90,180 90,120"></polygon>
-          <polygon class="radar-grid" points="150,120 180,135 180,165 150,180 120,165 120,135"></polygon>
+          <!-- Grid rings (Mathematically precise regular hexagon) -->
+          <polygon class="radar-grid" points="150,35 250,92.5 250,207.5 150,265 50,207.5 50,92.5"></polygon>
+          <polygon class="radar-grid" points="150,63.75 225,106.9 225,193.1 150,236.25 75,193.1 75,106.9"></polygon>
+          <polygon class="radar-grid" points="150,92.5 200,121.25 200,178.75 150,207.5 100,178.75 100,121.25"></polygon>
+          <polygon class="radar-grid" points="150,121.25 175,135.6 175,164.4 150,178.75 125,164.4 125,135.6"></polygon>
           <!-- Axis lines -->
-          <line class="radar-axis" x1="150" y1="150" x2="150" y2="30"></line>
-          <line class="radar-axis" x1="150" y1="150" x2="270" y2="90"></line>
-          <line class="radar-axis" x1="150" y1="150" x2="270" y2="210"></line>
-          <line class="radar-axis" x1="150" y1="150" x2="150" y2="270"></line>
-          <line class="radar-axis" x1="150" y1="150" x2="30" y2="210"></line>
-          <line class="radar-axis" x1="150" y1="150" x2="30" y2="90"></line>
+          <line class="radar-axis" x1="150" y1="150" x2="150" y2="35"></line>
+          <line class="radar-axis" x1="150" y1="150" x2="250" y2="92.5"></line>
+          <line class="radar-axis" x1="150" y1="150" x2="250" y2="207.5"></line>
+          <line class="radar-axis" x1="150" y1="150" x2="150" y2="265"></line>
+          <line class="radar-axis" x1="150" y1="150" x2="50" y2="207.5"></line>
+          <line class="radar-axis" x1="150" y1="150" x2="50" y2="92.5"></line>
           <!-- Data polygon (animated via JS) -->
           <defs>
             <clipPath id="radar-data-clip">
-              <polygon id="radar-clip-polygon" points="150,33 265,93 260,205 150,260 44,203 38,93"></polygon>
+              <polygon id="radar-clip-polygon" points="150,42 244,98 240,202 150,251 55,202 55,98"></polygon>
             </clipPath>
           </defs>
           <!-- Inner Wave Glow (Clipped to skills polygon) -->
@@ -226,7 +226,7 @@
             <circle class="radar-inner-glow" cx="150" cy="150" r="140"></circle>
             <circle class="radar-inner-glow" cx="150" cy="150" r="140"></circle>
           </g>
-          <polygon id="radar-data" class="radar-data" points="150,33 265,93 260,205 150,260 44,203 38,93"></polygon>
+          <polygon id="radar-data" class="radar-data" points="150,42 244,98 240,202 150,251 55,202 55,98"></polygon>
           <!-- Data dots -->
           <g id="radar-dots" class="radar-dots"></g>
         </svg>
@@ -860,10 +860,24 @@
     </div>
   </div>
 
-  <!-- GSAP & Main Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="script.js"></script>
+  <!-- Loader: ensure GSAP + ScrollTrigger load before script.js to avoid race issues -->
+  <script>
+    window.addEventListener("load", () => {
+      const gsapScript = document.createElement("script");
+      gsapScript.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js";
+      gsapScript.onload = () => {
+        const stScript = document.createElement("script");
+        stScript.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js";
+        stScript.onload = () => {
+          const mainScript = document.createElement("script");
+          mainScript.src = "script.js";
+          document.body.appendChild(mainScript);
+        };
+        document.body.appendChild(stScript);
+      };
+      document.body.appendChild(gsapScript);
+    });
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 </body>

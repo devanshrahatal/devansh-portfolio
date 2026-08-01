@@ -47,7 +47,6 @@ if (logContainer && preloader) {
           if (typeof tl !== 'undefined') tl.play();
           
           ScrollTrigger.refresh();
-          updateScrollProgress();
           
         }, 800); // Pause after last log before fade
       }
@@ -58,28 +57,45 @@ if (logContainer && preloader) {
 // Scroll Progress Bar & Watermark Percentage
 function updateScrollProgress() {
   const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-  const totalHeight = (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight;
-  const scrolled = totalHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / totalHeight) * 100)) : 0;
+  const docHeight = Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.offsetHeight
+  );
+  const winHeight = window.innerHeight || document.documentElement.clientHeight;
+  const totalHeight = docHeight - winHeight;
+
+  const scrolled = totalHeight > 0 ? Math.min(100, Math.max(0, Math.round((scrollTop / totalHeight) * 100))) : 0;
   
   const progressBar = document.getElementById("scroll-progress");
   const percentText = document.getElementById("scroll-percent-text");
   
   if (progressBar) progressBar.style.width = scrolled + "%";
-  if (percentText) {
-    percentText.innerText = Math.round(scrolled) + "%";
-    if (scrolled > 1) {
-      percentText.classList.add("active");
-    } else {
-      percentText.classList.remove("active");
-    }
-  }
+  if (percentText) percentText.innerText = scrolled + "%";
 }
 
 window.addEventListener("scroll", updateScrollProgress, { passive: true });
 window.addEventListener("resize", updateScrollProgress);
-window.addEventListener("load", updateScrollProgress);
 document.addEventListener("DOMContentLoaded", updateScrollProgress);
-updateScrollProgress();
+window.addEventListener("load", updateScrollProgress);
+setTimeout(updateScrollProgress, 800);
+
+// GSAP ScrollTrigger Backup for Top Progress Line & Watermark %
+ScrollTrigger.create({
+  trigger: document.body,
+  start: "top top",
+  end: "bottom bottom",
+  scrub: true,
+  onUpdate: (self) => {
+    const val = Math.round(self.progress * 100);
+    const progressBar = document.getElementById("scroll-progress");
+    const percentText = document.getElementById("scroll-percent-text");
+
+    if (progressBar) progressBar.style.width = val + "%";
+    if (percentText) percentText.innerText = val + "%";
+  }
+});
 
 // =============== GSAP Hero Entrance Animations ===============
 
@@ -1075,12 +1091,12 @@ scrubTexts.forEach(text => {
 // ===================== SKILL ANALYTICS RADAR CHART =====================
 const radarCenter = 150;
 const radarAxesDirs = [
-  { dx: 0, dy: -125 },    // Python
-  { dx: 125, dy: -62 },   // SQL
-  { dx: 125, dy: 62 },    // Visualization
-  { dx: 0, dy: 125 },     // Statistics
-  { dx: -125, dy: 62 },   // ML
-  { dx: -125, dy: -62 }   // Excel
+  { dx: 0, dy: -115 },     // Python
+  { dx: 99.6, dy: -57.5 }, // SQL
+  { dx: 99.6, dy: 57.5 },  // Visualization
+  { dx: 0, dy: 115 },      // Statistics
+  { dx: -99.6, dy: 57.5 }, // ML
+  { dx: -99.6, dy: -57.5 } // Excel
 ];
 const radarTargetSkills = [0.94, 0.92, 0.90, 0.88, 0.85, 0.90]; // Python, SQL, Vis, Stats, ML, Excel
 
@@ -1121,17 +1137,19 @@ function drawRadar(progressVal) {
   }
 }
 
-// Initial draw (Contracted at 0 so it is not pre-filled before scrolling)
-radarProgress.val = 0;
-drawRadar(0);
+// Initial draw (Full scale)
+drawRadar(1);
 
-// Animate radar chart on scroll — expand from center when scrolled into view
+// Animate radar chart on scroll — expand from center on first view
 if (document.getElementById("radar-chart")) {
+  // Reset to small, then animate to full on scroll enter
   ScrollTrigger.create({
     trigger: "#radar-chart",
-    start: "top 85%",
+    start: "top 95%",
     once: true,
     onEnter: () => {
+      radarProgress.val = 0.15;
+      drawRadar(0.15);
       gsap.to(radarProgress, {
         val: 1,
         duration: 1.4,
