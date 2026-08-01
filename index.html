@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Devansh Rahatal | Data Analyst Portfolio</title>
+  <link rel="icon" href="./assets/personal-images/devansh-icon.png" type="image/png">
+
+  <!-- Content sourced from resume: :contentReference[oaicite:1]{index=1} -->
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Main CSS (keep your existing style.css) -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Cyberpunk Preloader -->
+  <div id="preloader">
+    <div class="terminal-frame">
+      <div class="terminal-header">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="terminal-title">DATA_PIPELINE: ANALYTICS_ENGINE.EXE</span>
+      </div>
+      <div class="terminal-body" id="preloader-logs">
+        <!-- Logs will appear here via JS -->
+        <span class="cursor">_</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Glowing background blobs -->
+  <div class="bg-blur bg-blur-1"></div>
+  <div class="bg-blur bg-blur-2"></div>
+  
+  <!-- Fixed Top Blur for Navbar Readability -->
+  <div class="header-blur"></div>
+
+  <!-- Antigravity Particles Canvas -->
+  <canvas id="antigravity-canvas"></canvas>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="logo-circle">D</div>
+      <span class="logo-text">Devansh<span class="accent">.</span></span>
+    </div>
+
+    <button class="menu-btn" aria-label="Open Menu">☰</button>
+    
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a href="./assets/Devansh_Resume.pdf" download="Devansh_Resume.pdf" class="nav-cta" id="navDownloadBtn">Download CV</a>
+  </header>
+
+  <!-- Scroll Progress Line -->
+  <div id="scroll-progress"></div>
+  <div id="scroll-percent-text">0%</div>
+
+  <!-- Mobile Nav (Moved to body to avoid transform stacking context issues) -->
+  <div class="nav-overlay"></div>
+  <nav class="mobile-nav">
+    <button class="close-menu" aria-label="Close Menu">×</button>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#certificates">Certificates</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- HERO -->
+  <main class="hero" id="top">
+    <section class="hero-content">
+      <p class="hero-eyebrow">Hi, I'm</p>
+      <h1 class="hero-title" data-text="Devansh Rahatal">Devansh <span class="accent">Rahatal</span></h1>
+      <h2 class="hero-subtitle">Roles : <span id="typewriter"> </span></h2>
+      <a href="./assets/Devansh_Resume.pdf" download="Devansh_Resume.pdf" class="hero-download-btn" id="heroDownloadBtn">Download CV</a>
+      <p class="hero-desc">
+        Results-driven Data Analyst with hands-on experience across 10+ projects spanning data analytics, business intelligence, and machine learning. Skilled in Python, SQL, and Power BI, with additional experience in Docker and FastAPI for end-to-end deployment.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn primary-btn">View Projects</a>
+        <a href="#contact" class="btn ghost-btn">Contact</a>
+      </div>
+      <div class="hero-tags">
+        <span>SQL & Data Modeling</span>
+        <span>Power BI</span>
+        <span>Python</span>
+        <span>MySQL</span>
+        <span>FastAPI</span>
+        <span>Docker</span>
+      </div>
+    </section>
+
+    <section class="hero-visual">
+      <div class="hero-image-wrapper">
+        <div class="hero-orbit"></div> <!-- Tail effect -->
+        <div class="orbit-dot"></div>   <!-- Glowing dot -->
+        <img src="./assets/personal-images/devansh-hero-img.png" alt="Devansh Rahatal" class="hero-img" />
+      </div>
+
+      <div class="hero-card">
+        <div class="floating-badge">
+          <span class="badge-title">Open</span>
+          <span class="badge-subtitle">To Work</span>
+        </div>
+        <div class="hero-card-header">
+          <span class="status-dot"></span>
+          <span class="status-text">Access : Online</span>
+        </div>
+        <div class="hero-card-body">
+          <p class="hero-card-title">Currently Analyzing</p>
+          <p class="hero-card-project">ReadmitIQ — Patient Readmission Risk Analyzer</p>
+          <div class="hero-metrics">
+            <div class="metric"><span class="metric-label">Focus </span><span class="metric-value">Healthcare Risk Analytics</span></div>
+            <div class="metric"><span class="metric-label">Tools </span><span class="metric-value">Python · Scikit-Learn · ML · Power BI</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ABOUT -->
+  <section id="about" class="about-section">
+    <div class="about-container">
+      <div class="about-left">
+        <h2 class="section-title" data-glitch="About Me">About <span class="accent">Me</span></h2>
+
+        <p class="about-text scrub-text">
+          I'm <strong>Devansh Rahatal</strong>, a Results-Driven Data Analyst, Business Analyst, and Power BI Developer based in Vadodara, Gujarat.
+          I specialize in transforming complex raw datasets into actionable business intelligence, architecting <span class="keyword-tooltip" data-tooltip="Star-Schema Warehousing — 6 to 7-table dimensional schemas">star-schema data warehouses</span>, performing exploratory data analysis (EDA), and designing <span class="keyword-tooltip" data-tooltip="Executive Reporting — Interactive Power BI dashboards with DAX">interactive Power BI dashboards</span> that empower strategic decision-making across domains like healthcare, logistics, and operations.
+        </p>
+
+        <p class="about-text scrub-text">
+          I hold a B.Tech in A.I. & Data Science (CPI: 9.15) from ITM SLS Baroda University, with professional experience as a Data Analyst Trainee at LinuxWorld Informatics and Lecturer Intern in System Programming.
+        </p>
+
+        <div class="about-highlights">
+          <div class="highlight-card">
+            <span class="highlight-number">01</span>
+            <p class="highlight-text">SQL & Data Warehousing</p>
+          </div>
+          <div class="highlight-card">
+            <span class="highlight-number">02</span>
+            <p class="highlight-text">Power BI & Executive Dashboards</p>
+          </div>
+          <div class="highlight-card">
+            <span class="highlight-number">03</span>
+            <p class="highlight-text">Exploratory Data Analysis (EDA)</p>
+          </div>
+          <div class="highlight-card">
+            <span class="highlight-number">04</span>
+            <p class="highlight-text">Data Storytelling & Reporting</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-right">
+        <div class="about-card">
+          <div class="about-card-inner">
+            <h3>Current Focus</h3>
+            <p>Designing star-schema data models, conducting exploratory data analysis, and building executive Power BI dashboards to deliver strategic business insights.</p>
+
+            <div class="progress-container">
+              <label>SQL & Data Warehousing</label>
+              <div class="progress-bar"><span style="width: 92%;"></span></div>
+
+              <label>Power BI / DAX / Power Query</label>
+              <div class="progress-bar"><span style="width: 90%;"></span></div>
+
+              <label>Python & Predictive Modeling</label>
+              <div class="progress-bar"><span style="width: 88%;"></span></div>
+            </div>
+
+            <div style="margin-top:1rem; color:var(--text-muted); font-size:0.88rem;">
+              Tools: Power BI · DAX · MySQL · Python · Scikit-Learn · FastAPI · Docker · Git
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE DASHBOARD -->
+  <section id="dashboard" class="dashboard-section">
+    <h2 class="section-title center" data-glitch="Skill Analytics">Skill <span class="accent">Analytics</span></h2>
+    <p class="dashboard-subtitle">A real-time radar view of my core data competencies.</p>
+
+    <div class="dashboard-card">
+      <div class="radar-chart-container">
+        <svg id="radar-chart" viewBox="0 0 300 300" class="radar-svg">
+          <!-- Grid rings -->
+          <polygon class="radar-grid" points="150,30 270,90 270,210 150,270 30,210 30,90"></polygon>
+          <polygon class="radar-grid" points="150,60 240,105 240,195 150,240 60,195 60,105"></polygon>
+          <polygon class="radar-grid" points="150,90 210,120 210,180 150,210 90,180 90,120"></polygon>
+          <polygon class="radar-grid" points="150,120 180,135 180,165 150,180 120,165 120,135"></polygon>
+          <!-- Axis lines -->
+          <line class="radar-axis" x1="150" y1="150" x2="150" y2="30"></line>
+          <line class="radar-axis" x1="150" y1="150" x2="270" y2="90"></line>
+          <line class="radar-axis" x1="150" y1="150" x2="270" y2="210"></line>
+          <line class="radar-axis" x1="150" y1="150" x2="150" y2="270"></line>
+          <line class="radar-axis" x1="150" y1="150" x2="30" y2="210"></line>
+          <line class="radar-axis" x1="150" y1="150" x2="30" y2="90"></line>
+          <!-- Data polygon (animated via JS) -->
+          <defs>
+            <clipPath id="radar-data-clip">
+              <polygon id="radar-clip-polygon" points="150,150 150,150 150,150 150,150 150,150 150,150"></polygon>
+            </clipPath>
+          </defs>
+          <!-- Inner Wave Glow (Clipped to skills polygon) -->
+          <g clip-path="url(#radar-data-clip)">
+            <circle class="radar-inner-glow" cx="150" cy="150" r="140"></circle>
+            <circle class="radar-inner-glow" cx="150" cy="150" r="140"></circle>
+          </g>
+          <polygon id="radar-data" class="radar-data" points="150,150 150,150 150,150 150,150 150,150 150,150"></polygon>
+          <!-- Data dots -->
+          <g id="radar-dots" class="radar-dots"></g>
+        </svg>
+        <!-- Labels positioned around chart -->
+        <span class="radar-label" style="top: 2%; left: 50%; transform: translateX(-50%);" data-subskills="Pandas:90,NumPy:85,Matplotlib:80,Scikit-learn:75,Seaborn:78">Python</span>
+        <span class="radar-label" style="top: 22%; right: 2%;" data-subskills="MySQL:88,PostgreSQL:80,CTEs:85,Window Functions:78,Query Optimization:82">SQL</span>
+        <span class="radar-label" style="bottom: 22%; right: 2%;" data-subskills="Power BI:90,Tableau:85,Matplotlib:80,Seaborn:78,Plotly:72">Visualization</span>
+        <span class="radar-label" style="bottom: 2%; left: 50%; transform: translateX(-50%);" data-subskills="Hypothesis Testing:80,Regression:78,Probability:75,A/B Testing:70,Bayesian:65">Statistics</span>
+        <span class="radar-label" style="bottom: 22%; left: 2%;" data-subskills="Regression & Classification:85,Clustering & Segmentation:80,Ensembles (Random Forest/XGBoost):82,Model Evaluation & CV:88,Feature Engineering:90">ML</span>
+        <span class="radar-label" style="top: 22%; left: 2%;" data-subskills="Pivot Tables:92,VLOOKUP:90,Macros:75,Power Query:80,Charts:88">Excel</span>
+        <!-- Radar Hover Popup -->
+        <div id="radar-popup" class="radar-popup">
+          <div class="radar-popup-title"></div>
+          <div class="radar-popup-skills"></div>
+        </div>
+      </div>
+      <div class="dashboard-stats">
+        <div class="stat-item"><span class="stat-value" data-target="10" data-suffix="+">0</span><span class="stat-label">Projects</span></div>
+        <div class="stat-item"><span class="stat-value" data-target="9" data-suffix=".15">0</span><span class="stat-label">B.Tech CPI</span></div>
+        <div class="stat-item"><span class="stat-value" data-target="100" data-suffix="K+">0</span><span class="stat-label">Records Analyzed</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION (from resume) -->
+  <section id="education" class="education-section" style="max-width:1180px; margin:3rem auto; padding:2rem 1rem;">
+    <h2 class="section-title center" data-glitch="My Education">My <span class="accent">Education</span></h2>
+    <p class="education-subtitle" style="text-align:center; color:var(--text-muted); margin-bottom:2rem;">Academic background and qualifications.</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.5rem;">
+      <div class="service-card" style="text-align:left;">
+        <h3 style="color:var(--accent); font-size:1.1rem; margin-bottom:0.4rem;">B.Tech. (A.I. & Data Science)</h3>
+        <p style="font-weight:600; color:#e2e8f0; margin-bottom:0.2rem;">ITM SLS Baroda University</p>
+        <p style="font-size:0.85rem; color:var(--text-muted);">Current CPI: 9.15 | 2023 – 2027 | Gujarat, India</p>
+      </div>
+      <div class="service-card" style="text-align:left;">
+        <h3 style="color:var(--accent); font-size:1.1rem; margin-bottom:0.4rem;">12th Grade</h3>
+        <p style="font-weight:600; color:#e2e8f0; margin-bottom:0.2rem;">Kendriya Vidyalaya No. 2, Army, Baroda</p>
+        <p style="font-size:0.85rem; color:var(--text-muted);">Percentage: 72% | 2023 | Gujarat, India</p>
+      </div>
+      <div class="service-card" style="text-align:left;">
+        <h3 style="color:var(--accent); font-size:1.1rem; margin-bottom:0.4rem;">10th Grade</h3>
+        <p style="font-weight:600; color:#e2e8f0; margin-bottom:0.2rem;">Kendriya Vidyalaya No. 2, Army, Baroda</p>
+        <p style="font-size:0.85rem; color:var(--text-muted);">Percentage: 84% | 2021 | Gujarat, India</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services-section">
+    <h2 class="section-title center" data-glitch="Open For Services">Open For <span class="accent">Services</span></h2>
+    <p class="services-subtitle">Transforming raw datasets into strategic business intelligence & predictive solutions.</p>
+
+    <div class="services-grid">
+      <!-- Service 1: Data Analytics & EDA -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12V7H5a2 2 0 010-4h14v4"></path><path d="M3 5v14a2 2 0 002 2h16v-5"></path><path d="M18 12a2 2 0 000 4h4v-4h-4z"></path></svg>
+        </div>
+        <h3>Data Analytics & EDA</h3>
+        <p>Cleaning, exploring, and analyzing complex datasets using Python (Pandas, NumPy) and SQL to uncover trends, distributions, and KPI metrics.</p>
+      </div>
+
+      <!-- Service 2: BI & Power BI Dashboards -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+        </div>
+        <h3>BI & Power BI Dashboards</h3>
+        <p>Designing star-schema data models, complex DAX measures, and multi-page interactive Power BI dashboards tracking business KPIs and SLAs.</p>
+      </div>
+
+      <!-- Service 3: Predictive ML & AI Modeling -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        </div>
+        <h3>Predictive ML & AI Modeling</h3>
+        <p>Building end-to-end Machine Learning pipelines — Supervised & Unsupervised Learning, Classification, Regression, Feature Engineering, and model evaluation with Scikit-Learn & Python.</p>
+      </div>
+
+      <!-- Service 4: End-to-End Data Pipelines -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+        </div>
+        <h3>End-to-End Data Pipelines</h3>
+        <p>Architecting multi-table MySQL star schemas, Python synthetic data ETL pipelines, and containerized analytics applications using Docker.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="projects-section">
+    <h2 class="section-title center" data-glitch="Featured Projects">Featured <span class="accent">Projects</span></h2>
+    <p class="projects-subtitle">Showcasing end-to-end data analytics, machine learning, and BI solutions.</p>
+
+    <div class="projects-grid">
+      <!-- Project 1: ReadmitIQ -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="./assets/projects-images/readmitIQ.jpg" alt="ReadmitIQ Patient Readmission Risk Analyzer" />
+        </div>
+        <div class="project-content">
+          <h3>ReadmitIQ — Patient Readmission Risk Analyzer</h3>
+          <p>
+            <strong>Problem:</strong> 30-day hospital readmissions cost healthcare systems over $26B annually while increasing patient mortality. Identifying high-risk patients from unorganized EHR datasets is complex and prone to human error.
+            <br><br>
+            <strong>Solution & Architecture:</strong>
+            <ul>
+              <li>Architected a 6-table MySQL star schema data warehouse (dim_patient, dim_diagnosis, dim_medication, dim_hospital, fact_admissions, fact_shap_scores) ETL pipeline processing 100,000+ patient EHR records.</li>
+              <li>Trained an XGBoost classification model with SMOTE class balancing across 11 clinical features in 5-fold cross-validation, achieving 0.65 ROC-AUC and 43.4% recall.</li>
+              <li>Calculated 100% dynamic patient-level SHAP risk explanations and containerized a sub-100ms FastAPI REST API using Docker & Docker Compose.</li>
+              <li>Designed a 4-page Power BI dashboard (Executive Overview, Clinical Risk, Patient Explorer, Model Performance).</li>
+            </ul>
+          </p>
+
+          <div class="project-tags"><span>MySQL</span><span>Python</span><span>XGBoost</span><span>SMOTE</span><span>SHAP</span><span>FastAPI</span><span>Docker</span><span>Power BI</span><span>Pytest</span></div>
+          <div class="project-links">
+            <a href="https://github.com/devanshrahatal/patient-readmission-risk" target="_blank" rel="noopener" class="btn-sm">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2: DriveGuard -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="./assets/projects-images/driveguard.png" alt="DriveGuard Driver State Monitoring System" />
+        </div>
+        <div class="project-content">
+          <h3>DriveGuard — Driver State Monitoring & Safety Analytics</h3>
+          <p>
+            <strong>Problem:</strong> Commercial driver drowsiness and distraction account for over 20% of serious highway accidents, yet fleets lack real-time computer vision alerts and automated post-drive forensic auditing.
+            <br><br>
+            <strong>Solution & Architecture:</strong>
+            <ul>
+              <li>Engineered a 30 FPS real-time vision pipeline using OpenCV and MediaPipe 3D Face Mesh tracking Eye Aspect Ratio (EAR &lt; 0.23) and Mouth Aspect Ratio (MAR &gt; 0.6).</li>
+              <li>Implemented a 0–100% fatigue scoring engine incorporating blink frequency, yawning, and 3D head pose vectoring (Yaw/Pitch/Roll).</li>
+              <li>Built an escalating safety system triggering local audio sirens, voice break timers, and automated SMTP emergency SOS emails within 15s of unresponsiveness with 5-second .mp4 evidence capture.</li>
+              <li>Developed a post-drive forensic engine (session_analysis.py) processing continuous 10-metric CSV telemetry logs to generate 3 Matplotlib trend charts, Gemini AI recommendations, and print-ready A–F graded PDF safety reports.</li>
+            </ul>
+          </p>
+
+          <div class="project-tags"><span>Python</span><span>OpenCV</span><span>MediaPipe</span><span>Matplotlib</span><span>FPDF2</span><span>Tkinter</span><span>Gemini AI</span><span>SMTP</span></div>
+          <div class="project-links">
+            <a href="https://github.com/devanshrahatal/driver-state-monitor" target="_blank" rel="noopener" class="btn-sm">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3: Zomato Operations Intelligence -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="./assets/projects-images/zomato.jpg" alt="Zomato Operations Intelligence Dashboard" />
+        </div>
+        <div class="project-content">
+          <h3>Zomato Operations Intelligence — Executive & Logistics Dashboard</h3>
+          <p>
+            <strong>Problem:</strong> Food delivery fulfillment across 15+ cities experiences delivery SLA breaches during monsoon seasons, restaurant prep bottlenecks, and user churn without unified operational analytics.
+            <br><br>
+            <strong>Solution & Architecture:</strong>
+            <ul>
+              <li>Architected a production MySQL star schema data warehouse featuring 7 dimension tables and 2 fact tables (fact_orders, fact_payments).</li>
+              <li>Engineered a Python data simulation pipeline generating 18 months of historical logistics data (Jan 2024 – Jun 2025) across 15 Indian cities, 1,287 online restaurants, and 669 active delivery riders.</li>
+              <li>Generated 119,994 order records and 123,275 payment transaction attempts incorporating realistic weather/monsoon delays and digital payment gateway drop-offs.</li>
+              <li>Formulated 38 custom DAX measures and built an interactive 3-page Power BI dashboard (Executive & Financial, Operations & Delivery, Customer Behavior & Churn).</li>
+            </ul>
+          </p>
+
+          <div class="project-tags"><span>SQL</span><span>MySQL</span><span>Power BI</span><span>DAX</span><span>Power Query</span><span>Python</span><span>ETL Pipeline</span></div>
+          <div class="project-links">
+            <a href="https://github.com/devanshrahatal/Zomato-Operations-Intelligence" target="_blank" rel="noopener" class="btn-sm">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="skills-section">
+    <h2 class="section-title center" data-glitch="My Skills">My <span class="accent">Skills</span></h2>
+    <p class="skills-subtitle">A comprehensive toolkit for data modeling, business intelligence, and machine learning.</p>
+
+    <!-- TECH STACK MARQUEE -->
+    <div class="tech-marquee">
+      <div class="marquee-track">
+        <span>SQL</span>
+        <span>Power BI</span>
+        <span>DAX</span>
+        <span>Python</span>
+        <span>Pandas</span>
+        <span>NumPy</span>
+        <span>Scikit-Learn</span>
+        <span>Machine Learning</span>
+        <span>Random Forest</span>
+        <span>MySQL</span>
+        <span>FastAPI</span>
+        <span>Docker</span>
+        <span>Git</span>
+        <!-- Duplicate content for seamless loop -->
+        <span>SQL</span>
+        <span>Power BI</span>
+        <span>DAX</span>
+        <span>Python</span>
+        <span>Pandas</span>
+        <span>NumPy</span>
+        <span>Scikit-Learn</span>
+        <span>Machine Learning</span>
+        <span>Random Forest</span>
+        <span>MySQL</span>
+        <span>FastAPI</span>
+        <span>Docker</span>
+        <span>Git</span>
+      </div>
+    </div>
+
+    <!-- Technical & SQL -->
+    <div class="skill-category">
+      <div class="skill-header">
+        <h3 class="category-title">SQL & Data Warehousing</h3>
+        <button class="skill-toggle" aria-label="Toggle Skills">
+          <span class="icon">+</span>
+        </button>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card"><h3>SQL & DATA MODELING</h3></div>
+        <div class="skill-card"><h3>STAR-SCHEMA WAREHOUSING</h3></div>
+        <div class="skill-card"><h3>MySQL</h3></div>
+        <div class="skill-card"><h3>EDA & STATISTICS</h3></div>
+        <div class="skill-card"><h3>CTEs & WINDOW FUNCTIONS</h3></div>
+        <div class="skill-card"><h3>QUERY OPTIMIZATION</h3></div>
+      </div>
+    </div>
+
+    <!-- Machine Learning & Data Science -->
+    <div class="skill-category">
+      <div class="skill-header">
+        <h3 class="category-title">Machine Learning & AI</h3>
+        <button class="skill-toggle" aria-label="Toggle Skills">
+          <span class="icon">+</span>
+        </button>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card"><h3>SUPERVISED & UNSUPERVISED ML</h3></div>
+        <div class="skill-card"><h3>CLASSIFICATION & REGRESSION</h3></div>
+        <div class="skill-card"><h3>FEATURE ENGINEERING</h3></div>
+        <div class="skill-card"><h3>SCIKIT-LEARN & ENSEMBLES</h3></div>
+        <div class="skill-card"><h3>MODEL EVALUATION & CV</h3></div>
+        <div class="skill-card"><h3>COMPUTER VISION (OPENCV)</h3></div>
+      </div>
+    </div>
+
+    <!-- BI & Data Visualization -->
+    <div class="skill-category">
+      <div class="skill-header">
+        <h3 class="category-title">BI & Data Visualization</h3>
+        <button class="skill-toggle" aria-label="Toggle Skills">
+          <span class="icon">+</span>
+        </button>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card"><h3>POWER BI (DAX & POWER QUERY)</h3></div>
+        <div class="skill-card"><h3>INTERACTIVE DASHBOARDS</h3></div>
+        <div class="skill-card"><h3>MATPLOTLIB & SEABORN</h3></div>
+        <div class="skill-card"><h3>EXECUTIVE REPORTING</h3></div>
+        <div class="skill-card"><h3>DATA STORYTELLING</h3></div>
+      </div>
+    </div>
+
+    <!-- Engineering & Tools -->
+    <div class="skill-category">
+      <div class="skill-header">
+        <h3 class="category-title">Engineering & Tools</h3>
+        <button class="skill-toggle" aria-label="Toggle Skills">
+          <span class="icon">+</span>
+        </button>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card"><h3>PYTHON (PANDAS, NUMPY)</h3></div>
+        <div class="skill-card"><h3>FASTAPI & REST APIs</h3></div>
+        <div class="skill-card"><h3>DOCKER</h3></div>
+        <div class="skill-card"><h3>GIT & GITHUB</h3></div>
+        <div class="skill-card"><h3>AUTOMATED PIPELINES</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE (from resume) -->
+  <section id="experience" class="experience-section">
+    <h2 class="section-title center" data-glitch="My Experience">My <span class="accent">Experience</span></h2>
+    <p class="experience-subtitle">Professional experience and academic leadership.</p>
+
+    <div class="experience-timeline">
+      <div class="timeline-glow"></div>
+
+      <div class="year-header" data-year="2026">2026</div>
+      <div class="exp-item">
+        <span class="exp-dot"></span>
+        <div class="exp-card left">
+          <div class="exp-image">
+            <img src="./assets/exp-images/DA-trainee.jpg" alt="LinuxWorld Informatics" />
+          </div>
+          <h3>Data Analyst Trainee</h3>
+          <p class="exp-duration">LinuxWorld Informatics Pvt. Ltd. — Jaipur, Rajasthan (Jun 2026 – Jul 2026)</p>
+          <ul>
+            <li>Delivered 10+ analytics case studies and dashboards using Excel, SQL, Python, and Power BI across data cleaning, EDA, and KPI reporting.</li>
+            <li>Built end-to-end analytical solutions covering data preparation, visualization, and reporting for real-world business scenarios.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="year-header" data-year="2025">2025</div>
+      <div class="exp-item">
+        <span class="exp-dot"></span>
+        <div class="exp-card right">
+          <div class="exp-image">
+            <img src="./assets/exp-images/lec-intern.png" alt="ITM SLS Baroda University" />
+          </div>
+          <h3>Lecturer Intern (System Programming)</h3>
+          <p class="exp-duration">ITM SLS Baroda University — Vadodara, Gujarat (Jun 2025 – Nov 2025)</p>
+          <ul>
+            <li>Conducted 40+ System Programming lab sessions, mentoring 100+ diploma students through hands-on technical instruction.</li>
+            <li>Evaluated 300+ practical assessments, maintaining accurate academic records and timely performance reporting.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="year-header" data-year="2024">2024</div>
+      <div class="exp-item">
+        <span class="exp-dot"></span>
+        <div class="exp-card left">
+          <div class="exp-image">
+            <img src="./assets/exp-images/web-co.png" alt="GDG on Campus ITMBU" />
+          </div>
+          <h3>Web Tech Coordinator</h3>
+          <p class="exp-duration">Google Developer Group on Campus — ITMBU (Aug 2024 – May 2025)</p>
+          <ul>
+            <li>Analyzed event registration data to optimize attendance tracking and improve event planning decisions.</li>
+            <li>Led data collection and visualization efforts, creating reports for community engagement metrics.</li>
+            <li>Collaborated with team members to build event dashboards, technical resources, and speak at technical workshops.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section id="certificates" class="certificates-section">
+    <h2 class="section-title center" data-glitch="My Certifications">My <span class="accent">Certifications</span></h2>
+    <p class="certificates-subtitle">Industry qualifications and training programs.</p>
+
+    <div class="certificates-marquee">
+      <div class="certificates-track">
+        <!-- Set 1 -->
+        <a href="./assets/certificate-images/lnuxworld-certificate.jpg" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
+          <div class="cert-image">
+            <img src="./assets/certificate-images/lnuxworld-certificate.jpg" alt="Data Analytics & BI Training Certificate" />
+          </div>
+          <div class="cert-info">
+            <h3>Data Analytics & BI Training</h3>
+            <p>LinuxWorld Informatics Pvt. Ltd.</p>
+            <span class="cert-date">2026 (Click to View)</span>
+          </div>
+        </a>
+
+        <a href="./assets/certificate-images/linuxworld-project-certificate.jpg" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
+          <div class="cert-image">
+            <img src="./assets/certificate-images/linuxworld-project-certificate.jpg" alt="Analytics Project Certification" />
+          </div>
+          <div class="cert-info">
+            <h3>Analytics Project Certification</h3>
+            <p>LinuxWorld Informatics Pvt. Ltd.</p>
+            <span class="cert-date">2026 (Click to View)</span>
+          </div>
+        </a>
+
+        <a href="./assets/certificate-images/edunet-foundaton-course.png" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
+          <div class="cert-image">
+            <img src="./assets/certificate-images/edunet-foundaton-course.png" alt="Edunet Foundation Course Certificate" />
+          </div>
+          <div class="cert-info">
+            <h3>Python, Data Analysis & AI</h3>
+            <p>Edunet Foundation | SAP Code Unnati</p>
+            <span class="cert-date">2025 (Click to View)</span>
+          </div>
+        </a>
+
+        <a href="./assets/certificate-images/edunet-advance-course.png" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
+          <div class="cert-image">
+            <img src="./assets/certificate-images/edunet-advance-course.png" alt="Edunet Advanced Course Certificate" />
+          </div>
+          <div class="cert-info">
+            <h3>Machine Learning & SAP Analytics</h3>
+            <p>Edunet Foundation | SAP Code Unnati</p>
+            <span class="cert-date">2026 (Click to View)</span>
+          </div>
+        </a>
+
+        <!-- Set 2 (Duplicate for Loop) -->
+        <a href="./assets/certificate-images/lnuxworld-certificate.jpg" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
+          <div class="cert-image">
+            <img src="./assets/certificate-images/lnuxworld-certificate.jpg" alt="Data Analytics & BI Training Certificate" />
+          </div>
+          <div class="cert-info">
+            <h3>Data Analytics & BI Training</h3>
+            <p>LinuxWorld Informatics Pvt. Ltd.</p>
+            <span class="cert-date">2026 (Click to View)</span>
+          </div>
+        </a>
+
+        <a href="./assets/certificate-images/linuxworld-project-certificate.jpg" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
+          <div class="cert-image">
+            <img src="./assets/certificate-images/linuxworld-project-certificate.jpg" alt="Analytics Project Certification" />
+          </div>
+          <div class="cert-info">
+            <h3>Analytics Project Certification</h3>
+            <p>LinuxWorld Informatics Pvt. Ltd.</p>
+            <span class="cert-date">2026 (Click to View)</span>
+          </div>
+        </a>
+
+        <a href="./assets/certificate-images/edunet-foundaton-course.png" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
+          <div class="cert-image">
+            <img src="./assets/certificate-images/edunet-foundaton-course.png" alt="Edunet Foundation Course Certificate" />
+          </div>
+          <div class="cert-info">
+            <h3>Python, Data Analysis & AI</h3>
+            <p>Edunet Foundation | SAP Code Unnati</p>
+            <span class="cert-date">2025 (Click to View)</span>
+          </div>
+        </a>
+
+        <a href="./assets/certificate-images/edunet-advance-course.png" target="_blank" rel="noopener" class="certificate-card" style="text-decoration:none;">
+          <div class="cert-image">
+            <img src="./assets/certificate-images/edunet-advance-course.png" alt="Edunet Advanced Course Certificate" />
+          </div>
+          <div class="cert-info">
+            <h3>Machine Learning & SAP Analytics</h3>
+            <p>Edunet Foundation | SAP Code Unnati</p>
+            <span class="cert-date">2026 (Click to View)</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <h2 class="section-title center" data-glitch="Get In Touch">Get In <span class="accent">Touch</span></h2>
+    <p class="contact-subtitle">Available for freelance opportunities and technical collaborations.</p>
+
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <h3>Let's Analyze Together</h3>
+        <p style="color:var(--text-muted);">I'm available for data analysis, dashboards, business intelligence projects, and collaboration.</p>
+
+        <div class="contact-details">
+          <p><strong>Email:</strong> <a href="mailto:devanshrahatal@gmail.com">devanshrahatal@gmail.com</a></p>
+          <p><strong>Phone:</strong> +91 6354937925</p>
+          <p><strong>Location:</strong> Vadodara, Gujarat, India</p>
+        </div>
+
+        <div class="contact-socials">
+          <a class="social-btn" href="https://github.com/devanshrahatal" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.05-.015-2.055-3.33.72-4.035-1.605-4.035-1.605-.54-1.38-1.335-1.755-1.335-1.755-1.087-.75.075-.735.075-.735 1.2.09 1.83 1.245 1.83 1.245 1.065 1.815 2.805 1.29 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405 1.02 0 2.04.135 3 .405 2.28-1.56 3.285-1.23 3.285-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.285 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+          <a class="social-btn" href="https://www.linkedin.com/in/devansh-rahatal-547016285/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a class="social-btn" href="https://www.instagram.com/devansh.rahatal/" target="_blank" rel="noopener" aria-label="Instagram">
+             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a class="social-btn" href="https://wa.me/916354937925" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="sql-terminal">
+        <div class="sql-terminal-header">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="sql-terminal-title">devansh@analytics:~ (bash)</span>
+        </div>
+        <form id="contact-form" class="sql-terminal-body">
+          <div class="sql-comment">$ # Initialize contact request</div>
+          <div class="sql-comment">$ # Enter your credentials and run ./send_message.sh</div>
+
+          <div class="sql-line">
+            <span class="sql-prompt">devansh@portfolio:~$</span>
+            <span class="sql-var">export NAME=</span>
+            <input type="text" name="from_name" class="sql-input" placeholder="Your Name" required />
+          </div>
+
+          <div class="sql-line">
+            <span class="sql-prompt">devansh@portfolio:~$</span>
+            <span class="sql-var">export EMAIL=</span>
+            <input type="email" name="from_email" class="sql-input" placeholder="you@email.com" required />
+          </div>
+
+          <div class="sql-line sql-line-textarea">
+            <span class="sql-prompt">devansh@portfolio:~$</span>
+            <span class="sql-var">export MESSAGE=</span>
+          </div>
+          <textarea name="message" class="sql-textarea" placeholder="Write your message here..." rows="4" required></textarea>
+
+          <div class="sql-line sql-execute-line">
+            <button type="submit" class="submit-btn sql-execute-btn">
+              <span class="sql-prompt">devansh@portfolio:~$</span> ./send_message.sh --submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>Designed & Built by <span class="accent">Devansh Rahatal</span></p>
+      <p class="footer-sub">© 2025 All rights reserved.</p>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Back to Top">
+    <svg class="btt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5"/>
+      <path d="M5 12l7-7 7 7"/>
+    </svg>
+    <span class="btt-trail"></span>
+    <span class="btt-trail"></span>
+    <span class="btt-trail"></span>
+  </button>
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-ring"></div>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox">
+    <button class="lightbox-close">&times;</button>
+    <img id="lightbox-img" src="" alt="Full Project View">
+  </div>
+
+  <!-- Resume Preview Popup -->
+  <div class="resume-preview-overlay" id="resumePreviewOverlay">
+    <div class="resume-preview-popup" id="resumePreviewPopup">
+      <div class="resume-preview-header">
+        <span class="resume-preview-title">Resume Preview</span>
+      </div>
+      <div class="resume-preview-body">
+        <iframe src="./assets/Devansh_Resume.pdf#toolbar=0&navpanes=0" class="resume-preview-iframe" title="Resume Preview"></iframe>
+      </div>
+      <div class="resume-preview-actions">
+        <button class="resume-btn resume-btn-close" id="resumeCloseBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Close
+        </button>
+        <a href="./assets/Devansh_Resume.pdf" download="Devansh_Resume.pdf" class="resume-btn resume-btn-download" id="resumeDownloadBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- DEVANSH AI ASSISTANT (HeroBot) FLOATING CHAT WIDGET -->
+  <div id="ai-chat-widget" class="ai-chat-widget">
+    <!-- Auto-popping Banner (slides out every 10 seconds) -->
+    <div id="ai-chat-banner" class="ai-chat-banner hidden">
+      <span id="ai-banner-text">Ask HeroBot about Devansh's 9.15 CPI!</span>
+    </div>
+
+    <!-- Floating Circular Chat Trigger Button -->
+    <button id="ai-chat-toggle" class="ai-chat-toggle-circle" aria-label="Open HeroBot Assistant" title="HeroBot Assistant">
+      <div class="ai-chat-icon">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          <circle cx="9" cy="10" r="1" fill="currentColor"></circle>
+          <circle cx="12" cy="10" r="1" fill="currentColor"></circle>
+          <circle cx="15" cy="10" r="1" fill="currentColor"></circle>
+        </svg>
+      </div>
+    </button>
+
+    <!-- Chat Modal Window -->
+    <div id="ai-chat-window" class="ai-chat-window hidden">
+      <div class="ai-chat-header">
+        <div class="ai-chat-header-info">
+          <div class="ai-avatar">H</div>
+          <div>
+            <h3>HeroBot</h3>
+            <span class="ai-status"><span class="status-led led-green"></span>Online | Devansh Portfolio AI</span>
+          </div>
+        </div>
+        <button id="ai-chat-close" class="ai-chat-close-btn" aria-label="Close Chat">&times;</button>
+      </div>
+
+      <div class="ai-chat-messages" id="ai-chat-messages">
+        <!-- Initial Welcome Message (Zero Emojis) -->
+        <div class="ai-message bot">
+          <div class="ai-msg-content">
+            Hello! I am <strong>HeroBot</strong>, Devansh's portfolio assistant. Ask me about his Data Analytics projects, SQL & Power BI skills, CPI (9.15), certifications, experience, or resume!
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Suggestion Chips with Left/Right Nav Buttons -->
+      <div class="ai-chips-wrapper">
+        <button type="button" id="ai-chip-prev" class="ai-chip-nav-btn" aria-label="Scroll left">&#8249;</button>
+        <div class="ai-chat-chips" id="ai-chat-chips">
+          <button class="ai-chip" data-query="Show Projects">Projects</button>
+          <button class="ai-chip" data-query="What are his core skills?">Skills</button>
+          <button class="ai-chip" data-query="Show Certifications">Certifications</button>
+          <button class="ai-chip" data-query="Education & CPI">Education & CPI</button>
+          <button class="ai-chip" data-query="Work Experience">Experience</button>
+          <button class="ai-chip" data-query="Download Resume">Download CV</button>
+          <button class="ai-chip" data-query="Contact Details">Contact</button>
+        </div>
+        <button type="button" id="ai-chip-next" class="ai-chip-nav-btn" aria-label="Scroll right">&#8250;</button>
+      </div>
+
+      <!-- Input Area -->
+      <form id="ai-chat-form" class="ai-chat-input-area">
+        <input type="text" id="ai-chat-input" placeholder="Ask about projects, CPI, certificates..." autocomplete="off" required />
+        <button type="submit" class="ai-chat-send-btn" aria-label="Send Message">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Loader: ensure GSAP + ScrollTrigger load before script.js to avoid race issues -->
+  <script>
+    window.addEventListener("load", () => {
+      const gsapScript = document.createElement("script");
+      gsapScript.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js";
+      gsapScript.onload = () => {
+        const stScript = document.createElement("script");
+        stScript.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js";
+        stScript.onload = () => {
+          const mainScript = document.createElement("script");
+          mainScript.src = "script.js";
+          document.body.appendChild(mainScript);
+        };
+        document.body.appendChild(stScript);
+      };
+      document.body.appendChild(gsapScript);
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+</body>
+</html>
