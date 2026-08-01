@@ -54,17 +54,30 @@ if (logContainer && preloader) {
   });
 }
 
-// Scroll Progress Bar
-window.addEventListener("scroll", () => {
-  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const scrolled = (scrollTop / scrollHeight) * 100;
+// Scroll Progress Bar & Watermark Percentage
+function updateScrollProgress() {
+  const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  const totalHeight = (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight;
+  const scrolled = totalHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / totalHeight) * 100)) : 0;
+  
   const progressBar = document.getElementById("scroll-progress");
   const percentText = document.getElementById("scroll-percent-text");
   
-  if(progressBar) progressBar.style.width = scrolled + "%";
-  if(percentText) percentText.innerText = Math.round(scrolled) + "%";
-});
+  if (progressBar) progressBar.style.width = scrolled + "%";
+  if (percentText) {
+    percentText.innerText = Math.round(scrolled) + "%";
+    if (scrolled > 1) {
+      percentText.classList.add("active");
+    } else {
+      percentText.classList.remove("active");
+    }
+  }
+}
+
+window.addEventListener("scroll", updateScrollProgress, { passive: true });
+window.addEventListener("resize", updateScrollProgress);
+document.addEventListener("DOMContentLoaded", updateScrollProgress);
+updateScrollProgress();
 
 // =============== GSAP Hero Entrance Animations ===============
 

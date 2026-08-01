@@ -99,24 +99,22 @@ html {
 
 #scroll-percent-text {
   position: fixed;
-  bottom: 6.2rem; /* Clean even gap above HeroBot circular button */
+  bottom: 6.2rem;
   right: 2rem;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 800;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
-  color: transparent;
-  background: linear-gradient(to bottom, #fff, #999);
-  -webkit-background-clip: text;
-  background-clip: text;
+  color: rgba(241, 245, 249, 0.95);
+  text-shadow: 0 0 10px rgba(226, 28, 52, 0.4);
   z-index: 12000;
-  opacity: 0.2;
+  opacity: 0.6;
   pointer-events: none;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s ease, color 0.3s ease;
 }
 
 #scroll-percent-text.active {
-  opacity: 0.8; 
+  opacity: 1;
+  color: var(--accent);
 }
 
 :root {
@@ -1069,8 +1067,27 @@ section {
   max-width: 560px;
 }
 
+.scrub-text {
+  background: linear-gradient(to right, #ffffff 50%, #64748b 50%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .about-text strong {
   color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .scrub-text {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    color: #cbd5e1 !important;
+    -webkit-text-fill-color: #cbd5e1 !important;
+  }
 }
 
 .about-highlights {
