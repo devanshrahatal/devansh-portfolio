@@ -1116,24 +1116,26 @@ function drawRadar(progressVal) {
 // Initial draw (Full scale)
 drawRadar(1);
 
-// Animate radar chart on scroll
+// Animate radar chart on scroll — expand from center on first view
 if (document.getElementById("radar-chart")) {
-  gsap.fromTo(radarProgress, 
-    { val: 0.4 },
-    {
-      val: 1,
-      duration: 1.2,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: "#radar-chart",
-        start: "top 95%",
-        once: true
-      },
-      onUpdate: () => {
-        drawRadar(radarProgress.val);
-      }
+  // Reset to small, then animate to full on scroll enter
+  ScrollTrigger.create({
+    trigger: "#radar-chart",
+    start: "top 95%",
+    once: true,
+    onEnter: () => {
+      radarProgress.val = 0.15;
+      drawRadar(0.15);
+      gsap.to(radarProgress, {
+        val: 1,
+        duration: 1.4,
+        ease: "power2.out",
+        onUpdate: () => {
+          drawRadar(radarProgress.val);
+        }
+      });
     }
-  );
+  });
 
   // Label Hover Interactivity
   const radarLabels = document.querySelectorAll(".radar-label");
@@ -1207,20 +1209,39 @@ document.querySelectorAll(".stat-value[data-target]").forEach(statEl => {
   });
 });
 
-// ================= CERTIFICATE MARQUEE MANUAL SWIPE & BUTTON CONTROLS =================
+// ================= CERTIFICATE MARQUEE TOUCH SWIPE =================
 const certMarquee = document.getElementById("certificates-marquee");
-const certPrevBtn = document.getElementById("cert-prev");
-const certNextBtn = document.getElementById("cert-next");
+const certTrack = document.getElementById("certificates-track");
 
-if (certPrevBtn && certMarquee) {
-  certPrevBtn.addEventListener("click", () => {
-    certMarquee.scrollBy({ left: -360, behavior: "smooth" });
-  });
-}
+if (certMarquee && certTrack) {
+  let isDragging = false;
+  let startX = 0;
+  let currentTranslate = 0;
 
-if (certNextBtn && certMarquee) {
-  certNextBtn.addEventListener("click", () => {
-    certMarquee.scrollBy({ left: 360, behavior: "smooth" });
+  certMarquee.addEventListener("touchstart", (e) => {
+    isDragging = true;
+    startX = e.touches[0].clientX;
+    certTrack.style.animationPlayState = "paused";
+    // Get current computed translateX from the animation
+    const style = window.getComputedStyle(certTrack);
+    const matrix = new DOMMatrix(style.transform);
+    currentTranslate = matrix.m41;
+    certTrack.style.transform = `translateX(${currentTranslate}px)`;
+  }, { passive: true });
+
+  certMarquee.addEventListener("touchmove", (e) => {
+    if (!isDragging) return;
+    const diff = e.touches[0].clientX - startX;
+    certTrack.style.transform = `translateX(${currentTranslate + diff}px)`;
+  }, { passive: true });
+
+  certMarquee.addEventListener("touchend", () => {
+    isDragging = false;
+    // Resume animation after a short delay
+    setTimeout(() => {
+      certTrack.style.transform = "";
+      certTrack.style.animationPlayState = "running";
+    }, 1500);
   });
 }
 
