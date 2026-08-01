@@ -4250,20 +4250,4 @@ li{
   }
 }
 
-/* Mobile Animation Safety Override: Guarantee 100% visibility on touch/mobile devices */
-@media (max-width: 900px) {
-  .about-left,
-  .about-right,
-  .highlight-card,
-  .project-card,
-  .skill-card,
-  .contact-wrapper > *,
-  .exp-card,
-  .year-header,
-  .service-card,
-  .certificate-card {
-    opacity: 1 !important;
-    transform: none !important;
-    visibility: visible !important;
-  }
-}
+

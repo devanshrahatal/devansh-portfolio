@@ -235,24 +235,34 @@ gsap.from(".navbar", {
   ease: "power2.out",
 });
 
+// ================= SECTION HEADINGS REVEAL ANIMATIONS =================
+ScrollTrigger.batch(".section-title, .section-subtitle, .dashboard-subtitle, .education-subtitle, .services-subtitle, .projects-subtitle, .skills-subtitle, .experience-subtitle, .certificates-subtitle, .contact-subtitle", {
+  start: "top 92%",
+  once: true,
+  onEnter: batch => gsap.fromTo(batch, 
+    { opacity: 0, y: 25, scale: 0.96 },
+    { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.08, ease: "power2.out" }
+  )
+});
+
 // ================== ABOUT SECTION SCROLL ANIMATION ==================
 
 ScrollTrigger.batch(".about-left, .about-right", {
   start: "top 95%",
   once: true,
-  onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, stagger: 0.2 })
+  onEnter: batch => gsap.fromTo(batch, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.2, ease: "power2.out" })
 });
 ScrollTrigger.batch(".highlight-card", {
   start: "top 95%",
   once: true,
-  onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.5, stagger: 0.15 })
+  onEnter: batch => gsap.fromTo(batch, { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.15, ease: "power2.out" })
 });
 
 // ===================== PROJECTS SCROLL ANIMATION =====================
 ScrollTrigger.batch(".project-card", {
   start: "top 95%",
   once: true,
-  onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, stagger: 0.2 })
+  onEnter: batch => gsap.fromTo(batch, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.2, ease: "power2.out" })
 });
 
 // ===================== SKILLS ACCORDION =====================
@@ -1103,29 +1113,32 @@ function drawRadar(progressVal) {
   }
 }
 
-// Initial draw (at 0)
-drawRadar(0);
+// Initial draw
+drawRadar(1);
 
 // Animate radar chart on scroll
 if (document.getElementById("radar-chart")) {
-  gsap.to(radarProgress, {
-    val: 1,
-    duration: 1.5,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: "#radar-chart",
-      start: "top 80%",
-      toggleActions: "play none none reverse"
-    },
-    onUpdate: () => {
-      drawRadar(radarProgress.val);
+  gsap.fromTo(radarProgress, 
+    { val: 0.2 },
+    {
+      val: 1,
+      duration: 1.5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#radar-chart",
+        start: "top 95%",
+        once: true
+      },
+      onUpdate: () => {
+        drawRadar(radarProgress.val);
+      }
     }
-  });
+  );
 
   // Label Hover Interactivity
   const radarLabels = document.querySelectorAll(".radar-label");
   radarLabels.forEach((label, index) => {
-    label.addEventListener("mouseenter", () => {
+    const highlightDot = () => {
       const circles = document.querySelectorAll("#radar-dots circle");
       if (circles[index]) {
         gsap.to(circles[index], {
@@ -1138,9 +1151,9 @@ if (document.getElementById("radar-chart")) {
       }
       label.style.color = "var(--accent)";
       label.style.textShadow = "0 0 10px rgba(226, 28, 52, 0.4)";
-    });
-    
-    label.addEventListener("mouseleave", () => {
+    };
+
+    const unhighlightDot = () => {
       const circles = document.querySelectorAll("#radar-dots circle");
       if (circles[index]) {
         gsap.to(circles[index], {
@@ -1153,7 +1166,10 @@ if (document.getElementById("radar-chart")) {
       }
       label.style.color = "";
       label.style.textShadow = "";
-    });
+    };
+
+    label.addEventListener("mouseenter", highlightDot);
+    label.addEventListener("mouseleave", unhighlightDot);
   });
 }
 
@@ -1172,8 +1188,7 @@ document.querySelectorAll(".stat-value[data-target]").forEach(statEl => {
   
   ScrollTrigger.create({
     trigger: statEl,
-    start: "top 85%",
-    toggleActions: "play none none reverse",
+    start: "top 95%",
     once: true,
     onEnter: () => {
       const counter = { val: 0 };
@@ -1189,7 +1204,7 @@ document.querySelectorAll(".stat-value[data-target]").forEach(statEl => {
   });
 });
 
-// ===================== RADAR HOVER DETAIL POPUPS =====================
+// ===================== RADAR HOVER / TOUCH DETAIL POPUPS =====================
 
 const radarPopup = document.getElementById("radar-popup");
 const radarPopupTitle = radarPopup ? radarPopup.querySelector(".radar-popup-title") : null;
@@ -1199,70 +1214,90 @@ const chartContainer = document.querySelector(".radar-chart-container");
 if (radarPopup && chartContainer) {
   const radarLabelsAll = document.querySelectorAll(".radar-label");
   
-  radarLabelsAll.forEach(label => {
-    label.addEventListener("mouseenter", (e) => {
-      const skillName = label.textContent;
-      const subskillsData = label.getAttribute("data-subskills");
-      if (!subskillsData) return;
-      
-      // Parse sub-skills
-      const subskills = subskillsData.split(",").map(item => {
-        const [name, value] = item.split(":");
-        return { name: name.trim(), value: parseInt(value, 10) };
-      });
-      
-      // Build popup content
-      radarPopupTitle.textContent = skillName;
-      radarPopupSkills.innerHTML = subskills.map(skill => `
-        <div class="radar-sub-skill">
-          <div class="radar-sub-skill-header">
-            <span>${skill.name}</span>
-            <span>${skill.value}%</span>
-          </div>
-          <div class="radar-sub-skill-bar">
-            <div class="radar-sub-skill-fill" style="width: 0%;" data-width="${skill.value}%"></div>
-          </div>
-        </div>
-      `).join("");
-      
-      // Position popup relative to chart container
-      const containerRect = chartContainer.getBoundingClientRect();
-      const labelRect = label.getBoundingClientRect();
-      
-      let popupLeft = labelRect.left - containerRect.left + labelRect.width / 2;
-      let popupTop = labelRect.top - containerRect.top + labelRect.height + 8;
-      
-      // Keep popup within container bounds
-      const popupWidth = 240;
-      if (popupLeft + popupWidth > containerRect.width) {
-        popupLeft = containerRect.width - popupWidth - 10;
-      }
-      if (popupLeft < 10) popupLeft = 10;
-      
-      // If near bottom, show above
-      if (popupTop + 200 > containerRect.height) {
-        popupTop = labelRect.top - containerRect.top - 200;
-      }
-      
-      radarPopup.style.left = popupLeft + "px";
-      radarPopup.style.top = popupTop + "px";
-      radarPopup.classList.add("active");
-      
-      // Animate bars after a tiny delay
-      requestAnimationFrame(() => {
-        radarPopup.querySelectorAll(".radar-sub-skill-fill").forEach(bar => {
-          bar.style.width = bar.getAttribute("data-width");
-        });
-      });
+  const showPopupForLabel = (label) => {
+    const skillName = label.textContent;
+    const subskillsData = label.getAttribute("data-subskills");
+    if (!subskillsData) return;
+    
+    // Parse sub-skills
+    const subskills = subskillsData.split(",").map(item => {
+      const [name, value] = item.split(":");
+      return { name: name.trim(), value: parseInt(value, 10) };
     });
     
-    label.addEventListener("mouseleave", () => {
-      radarPopup.classList.remove("active");
-      // Reset bar widths
+    // Build popup content
+    radarPopupTitle.textContent = skillName;
+    radarPopupSkills.innerHTML = subskills.map(skill => `
+      <div class="radar-sub-skill">
+        <div class="radar-sub-skill-header">
+          <span>${skill.name}</span>
+          <span>${skill.value}%</span>
+        </div>
+        <div class="radar-sub-skill-bar">
+          <div class="radar-sub-skill-fill" style="width: 0%;" data-width="${skill.value}%"></div>
+        </div>
+      </div>
+    `).join("");
+    
+    // Position popup relative to chart container
+    const containerRect = chartContainer.getBoundingClientRect();
+    const labelRect = label.getBoundingClientRect();
+    
+    let popupLeft = labelRect.left - containerRect.left + labelRect.width / 2;
+    let popupTop = labelRect.top - containerRect.top + labelRect.height + 8;
+    
+    // Keep popup within container bounds
+    const popupWidth = 240;
+    if (popupLeft + popupWidth > containerRect.width) {
+      popupLeft = containerRect.width - popupWidth - 10;
+    }
+    if (popupLeft < 10) popupLeft = 10;
+    
+    // If near bottom, show above
+    if (popupTop + 200 > containerRect.height) {
+      popupTop = labelRect.top - containerRect.top - 200;
+    }
+    
+    radarPopup.style.left = popupLeft + "px";
+    radarPopup.style.top = popupTop + "px";
+    radarPopup.classList.add("active");
+    
+    // Animate bars after a tiny delay
+    requestAnimationFrame(() => {
       radarPopup.querySelectorAll(".radar-sub-skill-fill").forEach(bar => {
-        bar.style.width = "0%";
+        bar.style.width = bar.getAttribute("data-width");
       });
     });
+  };
+
+  const hidePopup = () => {
+    radarPopup.classList.remove("active");
+    radarPopup.querySelectorAll(".radar-sub-skill-fill").forEach(bar => {
+      bar.style.width = "0%";
+    });
+  };
+
+  radarLabelsAll.forEach(label => {
+    // Mouse hover (desktop)
+    label.addEventListener("mouseenter", () => showPopupForLabel(label));
+    label.addEventListener("mouseleave", hidePopup);
+
+    // Touch / Click toggle (mobile & desktop)
+    label.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (radarPopup.classList.contains("active") && radarPopupTitle.textContent === label.textContent) {
+        hidePopup();
+      } else {
+        showPopupForLabel(label);
+      }
+    });
+  });
+
+  // Close popup when tapping outside
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("#radar-popup") && !e.target.closest(".radar-label")) {
+      hidePopup();
+    }
   });
 }
 
