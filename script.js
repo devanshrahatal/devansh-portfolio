@@ -886,20 +886,20 @@ magneticButtons.forEach((btn) => {
 const progressBars = document.querySelectorAll(".progress-bar span");
 
 progressBars.forEach((bar) => {
-  const targetWidth = bar.style.width;
+  const targetWidth = bar.getAttribute("data-width") || bar.style.width || "90%";
   
-  // Reset width initially
-  gsap.set(bar, { width: 0 });
-  
+  // Set width immediately for safety
+  bar.style.width = targetWidth;
+
   ScrollTrigger.create({
     trigger: bar,
-    start: "top 85%",
+    start: "top 95%",
+    once: true,
     onEnter: () => {
-      gsap.to(bar, {
-        width: targetWidth,
-        duration: 1.5,
-        ease: "power2.out"
-      });
+      gsap.fromTo(bar,
+        { width: "0%" },
+        { width: targetWidth, duration: 1.2, ease: "power2.out" }
+      );
     }
   });
 });
@@ -1067,16 +1067,16 @@ scrubTexts.forEach(text => {
 // ===================== SKILL ANALYTICS RADAR CHART =====================
 const radarCenter = 150;
 const radarAxesDirs = [
-  { dx: 0, dy: -120 },    // Python
-  { dx: 120, dy: -60 },   // SQL
-  { dx: 120, dy: 60 },    // Visualization
-  { dx: 0, dy: 120 },     // Statistics
-  { dx: -120, dy: 60 },   // ML
-  { dx: -120, dy: -60 }   // Excel
+  { dx: 0, dy: -125 },    // Python
+  { dx: 125, dy: -62 },   // SQL
+  { dx: 125, dy: 62 },    // Visualization
+  { dx: 0, dy: 125 },     // Statistics
+  { dx: -125, dy: 62 },   // ML
+  { dx: -125, dy: -62 }   // Excel
 ];
-const radarTargetSkills = [0.90, 0.85, 0.88, 0.75, 0.70, 0.80]; // Python, SQL, Vis, Stats, ML, Excel
+const radarTargetSkills = [0.94, 0.92, 0.90, 0.88, 0.85, 0.90]; // Python, SQL, Vis, Stats, ML, Excel
 
-const radarProgress = { val: 0 };
+const radarProgress = { val: 1 };
 
 function drawRadar(progressVal) {
   const points = radarAxesDirs.map((dir, i) => {
@@ -1113,16 +1113,16 @@ function drawRadar(progressVal) {
   }
 }
 
-// Initial draw
+// Initial draw (Full scale)
 drawRadar(1);
 
 // Animate radar chart on scroll
 if (document.getElementById("radar-chart")) {
   gsap.fromTo(radarProgress, 
-    { val: 0.2 },
+    { val: 0.4 },
     {
       val: 1,
-      duration: 1.5,
+      duration: 1.2,
       ease: "power2.out",
       scrollTrigger: {
         trigger: "#radar-chart",

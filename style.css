@@ -1062,20 +1062,15 @@ section {
 }
 
 .about-text {
-  font-size: 1rem;
-  line-height: 1.75;
-  color: var(--text-muted);
-  margin-bottom: 1rem;
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: #cbd5e1;
+  margin-bottom: 1.2rem;
   max-width: 560px;
 }
 
-.scrub-text {
-  background: linear-gradient(to right, #ffffff 50%, #475569 50%);
-  background-size: 200% 100%;
-  background-position: 100% 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.about-text strong {
+  color: #ffffff;
 }
 
 .about-highlights {
